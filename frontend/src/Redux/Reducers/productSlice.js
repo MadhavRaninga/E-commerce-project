@@ -4,14 +4,19 @@ const baseURL = "http://localhost:5000";
 
 // ✅ Fetch all products
 export const getProducts = createAsyncThunk(
-    "products/fetchAll",
+    "products/getallProduct",
     async (_, thunkAPI) => {
         try {
-            const { data } = await axios.get(
+            const response = await axios.get(
                 `${baseURL}/api/products/getallProduct`);
-            return data.products;
+
+                console.log("🔥 BACKEND RESPONSE:", response.data);
+                return response.data;
+
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data.message);
+            return thunkAPI.rejectWithValue(
+                error.response?.data?.message
+            );
         }
     }
 );

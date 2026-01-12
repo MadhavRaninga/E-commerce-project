@@ -1,59 +1,17 @@
-import React, { useState } from "react";
-
-const products = [
-  {
-    name: "Classic Denim Jacket",
-    price: "₹2499",
-    category: "men",
-    img: "https://images.unsplash.com/photo-1600185365483-26d7f4b3b8c1",
-  },
-  {
-    name: "Premium Cotton Shirt",
-    price: "₹1299",
-    category: "men",
-    img: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03",
-  },
-  {
-    name: "Formal Blazer",
-    price: "₹3499",
-    category: "men",
-    img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246",
-  },
-  {
-    name: "Summer Floral Dress",
-    price: "₹1899",
-    category: "women",
-    img: "https://images.unsplash.com/photo-1593032465171-bb94aee25a36",
-  },
-  {
-    name: "Casual Hoodie",
-    price: "₹1599",
-    category: "men",
-    img: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-  },
-  {
-    name: "Stylish Ethnic Kurta",
-    price: "₹2199",
-    category: "women",
-    img: "https://images.unsplash.com/photo-1618354691413-17bafc62f31c",
-  },
-  {
-    name: "Slim Fit Blue Jeans",
-    price: "₹1999",
-    category: "men",
-    img: "https://images.unsplash.com/photo-1514996937319-344454492b37",
-  },
-  {
-    name: "Printed Casual T-Shirt",
-    price: "₹899",
-    category: "men",
-    img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../Redux/Reducers/productSlice";
 
 const Homepage = () => {
   const [open, setOpen] = useState(false);
 
+  const dispatch = useDispatch()
+  const { products } = useSelector((state) => state.products)
+  console.log("Redux products:", products);
+
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
   return (
     <div className="bg-[#FAF9F6] text-gray-900">
 
@@ -95,9 +53,8 @@ const Homepage = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden border-t border-gray-200 transition-all duration-300 ${
-            open ? "max-h-screen" : "max-h-0 overflow-hidden"
-          }`}
+          className={`md:hidden border-t border-gray-200 transition-all duration-300 ${open ? "max-h-screen" : "max-h-0 overflow-hidden"
+            }`}
         >
           <nav className="flex flex-col px-6 py-4 space-y-4 text-gray-700">
             <a>Men</a>
@@ -148,8 +105,8 @@ const Homepage = () => {
                   cat === "Men"
                     ? "https://i.pinimg.com/1200x/00/86/28/0086281f6383d05b5389ceb0fbf95e87.jpg"
                     : cat === "Women"
-                    ? "https://i.pinimg.com/736x/9e/4b/3d/9e4b3d7f5168a155944ebc2e846f761f.jpg"
-                    : "https://i.pinimg.com/1200x/aa/79/43/aa794313fbc3c62b36c4f49ceae50653.jpg"
+                      ? "https://i.pinimg.com/736x/9e/4b/3d/9e4b3d7f5168a155944ebc2e846f761f.jpg"
+                      : "https://i.pinimg.com/1200x/aa/79/43/aa794313fbc3c62b36c4f49ceae50653.jpg"
                 }
                 className="w-full h-[420px] object-cover group-hover:scale-105 transition duration-500"
                 alt={cat}
@@ -165,45 +122,48 @@ const Homepage = () => {
       </section>
 
       {/* ================= PRODUCTS ================= */}
-      <section className="bg-[#FAF9F6] py-24">
+      <section className="bg-gray-50 py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center mb-14">
-            <h2 className="text-4xl font-semibold">Trending Products</h2>
-            <button className="border border-black px-6 py-2 hover:bg-black hover:text-white transition">
-              View All
-            </button>
+
+          {/* Header */}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-semibold">
+              Trending Products
+            </h2>
           </div>
 
+          {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-            {products.map((product, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition"
-              >
-                <div className="relative group">
+            {products?.length > 0 ? (
+              products.map((product) => (
+                <div
+                  key={product._id}
+                  className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+                >
                   <img
-                    src={product.img}
-                    className="w-full h-80 object-cover group-hover:scale-105 transition"
+                    src={product.image}
                     alt={product.name}
+                    className="w-full h-80 object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition">
-                    <button className="bg-white px-5 py-2 text-sm border hover:bg-black hover:text-white transition">
-                      Add to Cart
-                    </button>
-                    <button className="bg-white px-3 py-2 hover:bg-black hover:text-white transition">
-                      ❤️
-                    </button>
+
+                  <div className="p-5">
+                    <h3 className="text-lg font-medium truncate">
+                      {product.name}
+                    </h3>
+                    <p className="mt-2 text-gray-600 font-semibold">
+                      ₹{product.price}
+                    </p>
                   </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-medium truncate">{product.name}</h3>
-                  <p className="mt-2 text-gray-700 font-semibold">
-                    {product.price}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="col-span-full text-center text-gray-500">
+                No products found
+              </p>
+            )}
+
           </div>
+
         </div>
       </section>
 
