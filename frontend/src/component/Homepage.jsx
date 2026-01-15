@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../Redux/Reducers/productSlice";
 import Navbar from "../component/Navbar";
+import Footer from "./Footer";
 
 const Homepage = () => {
 
@@ -17,10 +18,10 @@ const Homepage = () => {
     <div className="bg-[#FAF9F6] text-gray-900">
 
       {/* ================= NAVBAR ================= */}
-      <Navbar/>
+      <Navbar />
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[92vh]">
+      <section className="relative h-[93vh]">
         <img
           src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
           className="w-full h-full object-cover"
@@ -88,8 +89,7 @@ const Homepage = () => {
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
             {products.length !== 0 ? (
-              products.map((product) => (
-
+              products.slice(0, 8).map((product) => (
                 <div
                   key={product._id}
                   className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
@@ -116,8 +116,10 @@ const Homepage = () => {
               </p>
             )}
           </div>
+
         </div>
       </section>
+
 
       {/* ================= TRUST SECTION ================= */}
       <section className="bg-gray-50 py-20">
@@ -179,80 +181,7 @@ const Homepage = () => {
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer className="bg-[#FAF9F6] border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-20">
-
-          {/* Top Footer */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
-
-            {/* Brand */}
-            <div>
-              <h3 className="text-2xl font-bold tracking-widest">
-                CLOTHIFY
-              </h3>
-              <p className="mt-4 text-gray-600 leading-relaxed">
-                Premium fashion destination for Men, Women & Kids.
-                Discover trends that define your style.
-              </p>
-            </div>
-
-            {/* Shop */}
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Shop</h4>
-              <ul className="space-y-3 text-gray-600">
-                <li className="hover:text-black cursor-pointer">Men</li>
-                <li className="hover:text-black cursor-pointer">Women</li>
-                <li className="hover:text-black cursor-pointer">Kids</li>
-                <li className="hover:text-black cursor-pointer">New Arrivals</li>
-                <li className="hover:text-black cursor-pointer">Sale</li>
-              </ul>
-            </div>
-
-            {/* Customer Care */}
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Customer Care</h4>
-              <ul className="space-y-3 text-gray-600">
-                <li className="hover:text-black cursor-pointer">Contact Us</li>
-                <li className="hover:text-black cursor-pointer">FAQs</li>
-                <li className="hover:text-black cursor-pointer">Shipping & Returns</li>
-                <li className="hover:text-black cursor-pointer">Privacy Policy</li>
-                <li className="hover:text-black cursor-pointer">Terms & Conditions</li>
-              </ul>
-            </div>
-
-            {/* Follow Us */}
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-              <div className="flex space-x-5 text-xl text-gray-700">
-                <span className="hover:text-black cursor-pointer">📘</span>
-                <span className="hover:text-black cursor-pointer">📸</span>
-                <span className="hover:text-black cursor-pointer">🐦</span>
-                <span className="hover:text-black cursor-pointer">▶️</span>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Bottom Footer */}
-          <div className="mt-16 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
-
-            <p>
-              © {new Date().getFullYear()} Clothify. All rights reserved.
-            </p>
-
-            <div className="flex items-center space-x-4 mt-4 md:mt-0 text-lg">
-              <span>💳</span>
-              <span>💰</span>
-              <span>🏦</span>
-              <span>📱</span>
-            </div>
-
-          </div>
-
-        </div>
-      </footer>
-
-
+        <Footer/>
     </div>
   );
 };

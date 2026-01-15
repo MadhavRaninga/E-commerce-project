@@ -8,6 +8,7 @@ import ResetPass from "./component/ResetPass";
 import Homepage from "./component/Homepage";
 import Mens from "./component/Mens";
 import Navbar from "./component/Navbar";
+import Footer from "./component/Footer";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/verifyOtp" element={<VerifyOtp/>}></Route>
           <Route path="/resetPassword" element={<ResetPass/>}></Route>
           <Route path="/mens" element={<Mens/>}></Route>
+          <Route path="/footer" element={<Footer/>}></Route>
 
 
         </Routes>

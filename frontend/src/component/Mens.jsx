@@ -1,16 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../Redux/Reducers/productSlice";
 import Navbar from "../component/Navbar";
+import { mensProduct } from "../Redux/Reducers/menSlice";
+import Footer from "./Footer";
 
 const Mens = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
-
+  const [priceRange, setPriceRange] = useState("all");
   const [sort, setSort] = useState("");
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(mensProduct());
   }, [dispatch]);
 
   // 🔹 Filter only Men's products
@@ -19,18 +20,35 @@ const Mens = () => {
   );
 
   const sortedProducts = useMemo(() => {
-    let sorted = [...mensProducts];
+    let filtered = [...mensProducts];
 
+    // 🔹 PRICE FILTER
+    if (priceRange === "below1000") {
+      filtered = filtered.filter((p) => p.price < 1000);
+    }
+
+    if (priceRange === "1000to2000") {
+      filtered = filtered.filter(
+        (p) => p.price >= 1000 && p.price <= 2000
+      );
+    }
+
+    if (priceRange === "above2000") {
+      filtered = filtered.filter((p) => p.price > 2000);
+    }
+
+    // 🔹 SORT
     if (sort === "lowToHigh") {
-      sorted.sort((a, b) => a.price - b.price);
+      filtered.sort((a, b) => a.price - b.price);
     }
 
     if (sort === "highToLow") {
-      sorted.sort((a, b) => b.price - a.price);
+      filtered.sort((a, b) => b.price - a.price);
     }
 
-    return sorted;
-  }, [mensProducts, sort]);
+    return filtered;
+  }, [mensProducts, sort, priceRange]);
+
 
   return (
     <div className="bg-[#FAF9F6] min-h-screen">
@@ -60,7 +78,7 @@ const Mens = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
 
           {/* ================= FILTER SIDEBAR ================= */}
-          <aside className="hidden lg:block bg-white p-6 rounded-xl shadow-sm h-fit">
+          <aside className="hidden lg:block bg-white p-6 rounded-xl shadow-sm h-fit sticky top-28 self-start">
             <h3 className="text-lg font-semibold mb-6">Filters</h3>
 
             <div className="mb-6">
@@ -71,6 +89,36 @@ const Mens = () => {
                 <li>Jeans</li>
                 <li>Jackets</li>
                 <li>Hoodies</li>
+              </ul>
+            </div>
+
+            <div className="mb-6">
+              <h4 className="font-medium mb-3">Price</h4>
+              <ul className="space-y-2 text-gray-600">
+                <li
+                  onClick={() => setPriceRange("all")}
+                  className="cursor-pointer hover:text-black"
+                >
+                  All
+                </li>
+                <li
+                  onClick={() => setPriceRange("below1000")}
+                  className="cursor-pointer hover:text-black"
+                >
+                  Below ₹1000
+                </li>
+                <li
+                  onClick={() => setPriceRange("1000to2000")}
+                  className="cursor-pointer hover:text-black"
+                >
+                  ₹1000 – ₹2000
+                </li>
+                <li
+                  onClick={() => setPriceRange("above2000")}
+                  className="cursor-pointer hover:text-black"
+                >
+                  Above ₹2000
+                </li>
               </ul>
             </div>
           </aside>
@@ -144,11 +192,10 @@ const Mens = () => {
                         </span>
 
                         <span
-                          className={`text-sm font-medium ${
-                            product.stock > 0
-                              ? "text-green-600"
-                              : "text-red-600"
-                          }`}
+                          className={`text-sm font-medium ${product.stock > 0
+                            ? "text-green-600"
+                            : "text-red-600"
+                            }`}
                         >
                           {product.stock > 0
                             ? `In Stock (${product.stock})`
@@ -168,6 +215,9 @@ const Mens = () => {
           </div>
         </div>
       </section>
+
+      {/* ================= FOOTER ================= */}
+        <Footer/>
     </div>
   );
 };
