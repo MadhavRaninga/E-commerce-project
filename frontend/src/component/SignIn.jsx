@@ -23,7 +23,7 @@ const SignIn = () => {
     if (message) {
       toast.success(message);
       dispatch(clearMessage())
-      // navigate("")
+      navigate("/")
     }
     if (error) {
       toast.error(error)

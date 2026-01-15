@@ -7,7 +7,6 @@ const router = express.Router()
 
 router.post("/addProduct", isAuth, isAdmin, upload.single("image"),  addProduct)
 
-// Public endpoints to allow storefront to view products without auth
 router.get("/getallProduct", getall)
 router.get("/getbyId/:id", getbyId)
 

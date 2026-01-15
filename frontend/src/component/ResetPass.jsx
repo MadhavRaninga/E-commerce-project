@@ -27,7 +27,7 @@ const ResetPass = () => {
         if (message) {
             toast.success(message)
             dispatch(clearMessage())
-            navigate("/")
+            navigate("/login")
         }
         if (error) {
             toast.error(error)
@@ -89,7 +89,7 @@ const ResetPass = () => {
                 {/* Back to login */}
                 <p className="text-center text-sm text-gray-600 mt-6">
                     Remember your password?{" "}
-                    <Link to="/" className="text-indigo-600 font-medium hover:underline cursor-pointer">
+                    <Link to="/login" className="text-indigo-600 font-medium hover:underline cursor-pointer">
                         Back to Login
                     </Link>
                 </p>

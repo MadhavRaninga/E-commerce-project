@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../Redux/Reducers/productSlice";
+import Navbar from "../component/Navbar";
 
 const Homepage = () => {
-  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch()
   const { products } = useSelector((state) => state.products)
@@ -17,55 +17,7 @@ const Homepage = () => {
     <div className="bg-[#FAF9F6] text-gray-900">
 
       {/* ================= NAVBAR ================= */}
-      <header className="border-b border-gray-200 sticky top-0 z-50 bg-[#FAF9F6]">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-
-          <h1 className="text-2xl font-bold tracking-widest cursor-pointer">
-            CLOTHIFY
-          </h1>
-
-          <nav className="hidden md:flex space-x-8 text-gray-700 font-medium">
-            <a className="hover:text-black">Men</a>
-            <a className="hover:text-black">Women</a>
-            <a className="hover:text-black">Kids</a>
-            <a className="hover:text-black">New</a>
-            <a className="hover:text-black">Sale</a>
-          </nav>
-
-          <div className="hidden md:flex space-x-6 text-xl text-gray-700">
-            <span>🔍</span>
-            <span>❤️</span>
-            <span className="relative">
-              🛒
-              <span className="absolute -top-2 -right-2 bg-black text-white text-xs px-1 rounded-full">
-                2
-              </span>
-            </span>
-            <span>👤</span>
-          </div>
-
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden text-2xl"
-          >
-            {open ? "✖" : "☰"}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div
-          className={`md:hidden border-t border-gray-200 transition-all duration-300 ${open ? "max-h-screen" : "max-h-0 overflow-hidden"
-            }`}
-        >
-          <nav className="flex flex-col px-6 py-4 space-y-4 text-gray-700">
-            <a>Men</a>
-            <a>Women</a>
-            <a>Kids</a>
-            <a>New</a>
-            <a>Sale</a>
-          </nav>
-        </div>
-      </header>
+      <Navbar/>
 
       {/* ================= HERO ================= */}
       <section className="relative h-[92vh]">
@@ -137,7 +89,7 @@ const Homepage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
             {products.length !== 0 ? (
               products.map((product) => (
-                
+
                 <div
                   key={product._id}
                   className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
@@ -166,6 +118,141 @@ const Homepage = () => {
           </div>
         </div>
       </section>
+
+      {/* ================= TRUST SECTION ================= */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+
+            <div className="flex flex-col items-center">
+              <div className="text-4xl mb-4">🚚</div>
+              <h3 className="text-xl font-semibold">Free Shipping</h3>
+              <p className="mt-2 text-gray-600">
+                Free delivery on all orders above ₹999
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <div className="text-4xl mb-4">🔄</div>
+              <h3 className="text-xl font-semibold">Easy Returns</h3>
+              <p className="mt-2 text-gray-600">
+                7 days easy return & exchange policy
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <div className="text-4xl mb-4">🔒</div>
+              <h3 className="text-xl font-semibold">Secure Payments</h3>
+              <p className="mt-2 text-gray-600">
+                100% secure & trusted payment gateways
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= NEWSLETTER SECTION ================= */}
+      <section className="bg-[#FAF9F6] py-28 border-t border-gray-200">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-wide">
+            Join Our Fashion Community
+          </h2>
+
+          <p className="mt-4 text-gray-600">
+            Be the first to know about new arrivals, exclusive offers & sales
+          </p>
+
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full sm:w-80 px-5 py-3 border border-gray-300 bg-white outline-none focus:border-black transition"
+            />
+            <button className="px-8 py-3 bg-black text-white font-semibold hover:bg-gray-900 transition">
+              Subscribe
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= FOOTER ================= */}
+      <footer className="bg-[#FAF9F6] border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+
+          {/* Top Footer */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+
+            {/* Brand */}
+            <div>
+              <h3 className="text-2xl font-bold tracking-widest">
+                CLOTHIFY
+              </h3>
+              <p className="mt-4 text-gray-600 leading-relaxed">
+                Premium fashion destination for Men, Women & Kids.
+                Discover trends that define your style.
+              </p>
+            </div>
+
+            {/* Shop */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Shop</h4>
+              <ul className="space-y-3 text-gray-600">
+                <li className="hover:text-black cursor-pointer">Men</li>
+                <li className="hover:text-black cursor-pointer">Women</li>
+                <li className="hover:text-black cursor-pointer">Kids</li>
+                <li className="hover:text-black cursor-pointer">New Arrivals</li>
+                <li className="hover:text-black cursor-pointer">Sale</li>
+              </ul>
+            </div>
+
+            {/* Customer Care */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Customer Care</h4>
+              <ul className="space-y-3 text-gray-600">
+                <li className="hover:text-black cursor-pointer">Contact Us</li>
+                <li className="hover:text-black cursor-pointer">FAQs</li>
+                <li className="hover:text-black cursor-pointer">Shipping & Returns</li>
+                <li className="hover:text-black cursor-pointer">Privacy Policy</li>
+                <li className="hover:text-black cursor-pointer">Terms & Conditions</li>
+              </ul>
+            </div>
+
+            {/* Follow Us */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+              <div className="flex space-x-5 text-xl text-gray-700">
+                <span className="hover:text-black cursor-pointer">📘</span>
+                <span className="hover:text-black cursor-pointer">📸</span>
+                <span className="hover:text-black cursor-pointer">🐦</span>
+                <span className="hover:text-black cursor-pointer">▶️</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="mt-16 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+
+            <p>
+              © {new Date().getFullYear()} Clothify. All rights reserved.
+            </p>
+
+            <div className="flex items-center space-x-4 mt-4 md:mt-0 text-lg">
+              <span>💳</span>
+              <span>💰</span>
+              <span>🏦</span>
+              <span>📱</span>
+            </div>
+
+          </div>
+
+        </div>
+      </footer>
+
+
     </div>
   );
 };

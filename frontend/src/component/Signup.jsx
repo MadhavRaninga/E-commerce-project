@@ -25,7 +25,7 @@ const Signup = () => {
   useEffect(()=> {
     if (message) {
       toast.success(message)
-      navigate("/")
+      navigate("/login")
       dispatch(clearMessage())
     }
     if (error) {
@@ -113,7 +113,7 @@ const Signup = () => {
         {/* Login redirect */}
         <p className="text-center text-sm text-gray-600">
           Already have an account?{" "}
-          <Link to="/" className="text-indigo-600 font-medium hover:underline cursor-pointer">
+          <Link to="/login" className="text-indigo-600 font-medium hover:underline cursor-pointer">
             Login
           </Link>
         </p>
