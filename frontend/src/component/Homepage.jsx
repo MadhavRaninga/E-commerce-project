@@ -21,7 +21,7 @@ const Homepage = () => {
       <Navbar />
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[93vh]">
+      <section className="relative h-[60vh]">
         <img
           src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
           className="w-full h-full object-cover"

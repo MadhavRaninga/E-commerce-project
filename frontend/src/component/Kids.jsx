@@ -1,26 +1,26 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../component/Navbar";
-import { mensProduct } from "../Redux/Reducers/menSlice";
+import { kidsProduct } from "../Redux/Reducers/kidsSlice"; // Assuming you create this slice
 import Footer from "./Footer";
 
-const Mens = () => {
+const Kids = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const [priceRange, setPriceRange] = useState("all");
   const [sort, setSort] = useState("");
 
   useEffect(() => {
-    dispatch(mensProduct());
+    dispatch(kidsProduct());
   }, [dispatch]);
 
-  // 🔹 Filter only Men's products
-  const mensProducts = products.filter(
-    (product) => product.category?.toLowerCase() === "men"
+  // 🔹 Filter only Kids' products
+  const kidsProducts = products.filter(
+    (product) => product.category?.toLowerCase() === "kids"
   );
 
   const sortedProducts = useMemo(() => {
-    let filtered = [...mensProducts];
+    let filtered = [...kidsProducts];
 
     // 🔹 PRICE FILTER
     if (priceRange === "below1000") {
@@ -47,7 +47,7 @@ const Mens = () => {
     }
 
     return filtered;
-  }, [mensProducts, sort, priceRange]);
+  }, [kidsProducts, sort, priceRange]);
 
 
   return (
@@ -57,18 +57,18 @@ const Mens = () => {
       {/* ================= HERO ================= */}
       <section className="relative h-[55vh]">
         <img
-          src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2070&auto=format&fit=crop"
-          alt="Men Collection"
+          src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4"
+          alt="Kids Collection"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/30"></div>
 
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-4xl md:text-5xl font-semibold">
-            Men’s Collection
+            Kids’ Collection
           </h1>
-          <p className="mt-3 text-gray-200">
-            Premium styles curated for modern men
+          <p className="mt-3 text-gray-200 text-lg">
+            Fun, comfortable, and colorful styles
           </p>
         </div>
       </section>
@@ -84,11 +84,11 @@ const Mens = () => {
             <div className="mb-6">
               <h4 className="font-medium mb-3">Category</h4>
               <ul className="space-y-2 text-gray-600">
-                <li>T-Shirts</li>
-                <li>Shirts</li>
-                <li>Jeans</li>
-                <li>Jackets</li>
-                <li>Hoodies</li>
+                <li>Boys Wear</li>
+                <li>Girls Wear</li>
+                <li>Infants & Toddlers</li>
+                <li>Footwear</li>
+                <li>Toys & Accessories</li>
               </ul>
             </div>
 
@@ -129,14 +129,14 @@ const Mens = () => {
             {/* Header */}
             <div className="flex justify-between items-center mb-10">
               <h2 className="text-2xl font-semibold">
-                Men’s Products ({sortedProducts.length})
+                Kids’ Products ({sortedProducts.length})
               </h2>
 
               {/* SORT DROPDOWN */}
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="border px-4 py-2 bg-white cursor-pointer"
+                className="border px-4 py-2 bg-white cursor-pointer rounded-lg"
               >
                 <option value="">Sort by</option>
                 <option value="lowToHigh">Price: Low to High</option>
@@ -150,14 +150,14 @@ const Mens = () => {
                 sortedProducts.map((product) => (
                   <div
                     key={product._id}
-                    className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition"
+                    className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
                   >
                     {/* Image */}
-                    <div className="relative overflow-hidden">
+                    <div className="relative overflow-hidden h-80">
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="w-full h-80 object-cover group-hover:scale-110 transition duration-500"
+                        className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                       />
 
                       {/* Category badge */}
@@ -166,11 +166,11 @@ const Mens = () => {
                       </span>
 
                       {/* Hover actions */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition">
-                        <button className="bg-white px-4 py-2 text-sm font-semibold hover:bg-black hover:text-white transition">
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition duration-300">
+                        <button className="bg-white px-4 py-2 text-sm font-semibold hover:bg-black hover:text-white transition rounded-md">
                           Add to Cart
                         </button>
-                        <button className="bg-white px-3 py-2 hover:bg-black hover:text-white transition">
+                        <button className="bg-white px-3 py-2 hover:bg-black hover:text-white transition rounded-md">
                           ❤️
                         </button>
                       </div>
@@ -198,7 +198,7 @@ const Mens = () => {
                             }`}
                         >
                           {product.stock > 0
-                            ? `In Stock (${product.stock})`
+                            ? `In Stock`
                             : "Out of Stock"}
                         </span>
                       </div>
@@ -206,8 +206,8 @@ const Mens = () => {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500 col-span-full text-center">
-                  No men’s products found
+                <p className="text-gray-500 col-span-full text-center py-10">
+                  No kids’ products found
                 </p>
               )}
             </div>
@@ -222,4 +222,4 @@ const Mens = () => {
   );
 };
 
-export default Mens;
+export default Kids;
