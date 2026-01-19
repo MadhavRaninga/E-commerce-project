@@ -3,7 +3,7 @@ const upload = require("../middleware/cloudinary")
 const cloudinary = require("../middleware/cloudinary")
 exports.addProduct = async (req, res) => {
     try {
-        const { name, description, price, stock, category } = req.body
+        const { name, description, price, stock, category, discount } = req.body
 
         if (!name || !description || !price || !stock || !category) {
             return res.status(400).json({ message: "All Fields are Required !" })
@@ -20,15 +20,16 @@ exports.addProduct = async (req, res) => {
             name,
             description,
             price,
+            discount,
             stock,
             image: req.file.path,
-            category
+            category,
         })
 
         res.status(201).json({ message: "Product Added Successfully.", product })
 
     } catch (error) {
-        res.status(500).json({ message: "Error while Add product !", error })
+        res.status(500).json({ message: "Error while Add product !", error: error.message })
     }
 }
 
@@ -73,22 +74,7 @@ exports.updateProduct = async (req, res) => {
             return res.status(404).json({ message: "Product not Found" })
         }
 
-        // if (req.file) {
-        //     if (product.image?.public_id) {
-        //         await cloudinary.uploader.destroy(product.image.public_id)
-        //     }
-
-        //     const result = await cloudinary.uploader.upload(req.file.path, {
-        //         folder: "madhav"
-        //     })
-
-        //     product.image = {
-        //         public_id: result.public_id,
-        //         url: result.secure_url
-        //     }
-
-        //     await product.save()
-        // }
+        
 
         res.status(200).json({ message: "Product Updated Successfully.", product })
 

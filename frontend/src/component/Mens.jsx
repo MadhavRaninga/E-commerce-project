@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../component/Navbar";
 import { mensProduct } from "../Redux/Reducers/menSlice";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const Mens = () => {
   const dispatch = useDispatch();
@@ -144,15 +145,15 @@ const Mens = () => {
               </select>
             </div>
 
-            {/* Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
               {sortedProducts.length > 0 ? (
                 sortedProducts.map((product) => (
+                  <Link key={product._id} to={`/product/${product._id}`}>    
                   <div
-                    key={product._id}
                     className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition"
                   >
                     {/* Image */}
+                    
                     <div className="relative overflow-hidden">
                       <img
                         src={product.image}
@@ -187,15 +188,37 @@ const Mens = () => {
                       </p>
 
                       <div className="flex justify-between items-center pt-2">
-                        <span className="text-lg font-bold">
-                          ₹{product.price}
-                        </span>
+                        {/* Price + Discount */}
+                        {product.discount && product.discount > 0 ? (
+                          <div className="flex flex-col">
+                            <span className="text-lg font-bold text-red-600">
+                              ₹
+                              {product.price -
+                                Math.round(
+                                  (product.price * product.discount) / 100
+                                )}
+                            </span>
+                            <div className="flex items-center gap-2 text-sm">
+                              <span className="text-gray-500 line-through">
+                                ₹{product.price}
+                              </span>
+                              <span className="text-red-600 font-semibold">
+                                {product.discount}% OFF
+                              </span>
+                            </div>
+                          </div>
+                        ) : (
+                          <span className="text-lg font-bold">
+                            ₹{product.price}
+                          </span>
+                        )}
 
                         <span
-                          className={`text-sm font-medium ${product.stock > 0
-                            ? "text-green-600"
-                            : "text-red-600"
-                            }`}
+                          className={`text-sm font-medium ${
+                            product.stock > 0
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }`}
                         >
                           {product.stock > 0
                             ? `In Stock (${product.stock})`
@@ -204,6 +227,7 @@ const Mens = () => {
                       </div>
                     </div>
                   </div>
+                  </Link>
                 ))
               ) : (
                 <p className="text-gray-500 col-span-full text-center">
@@ -214,6 +238,7 @@ const Mens = () => {
 
           </div>
         </div>
+            {/* Grid */}
       </section>
 
       {/* ================= FOOTER ================= */}

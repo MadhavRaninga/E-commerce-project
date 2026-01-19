@@ -104,9 +104,27 @@ const Homepage = () => {
                     <h3 className="text-lg font-medium truncate">
                       {product.name}
                     </h3>
-                    <p className="mt-2 text-gray-600 font-semibold">
-                      ₹{product.price}
-                    </p>
+
+                    {/* Price + Discount */}
+                    {product.discount && product.discount > 0 ? (
+                      <div className="mt-2 flex items-center gap-2">
+                        <span className="text-lg font-bold text-red-600">
+                          ₹
+                          {product.price -
+                            Math.round((product.price * product.discount) / 100)}
+                        </span>
+                        <span className="text-sm text-gray-500 line-through">
+                          ₹{product.price}
+                        </span>
+                        <span className="text-xs font-semibold text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
+                          {product.discount}% OFF
+                        </span>
+                      </div>
+                    ) : (
+                      <p className="mt-2 text-gray-600 font-semibold">
+                        ₹{product.price}
+                      </p>
+                    )}
                   </div>
                 </div>
               ))

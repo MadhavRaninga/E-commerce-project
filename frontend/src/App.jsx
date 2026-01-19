@@ -12,6 +12,8 @@ import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import Kids from "./component/Kids";
 import NewArrivals from "./component/NewArrival";
+import Sale from "./component/Sale";
+import ProductDetails from "./component/ProductDetail";
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
           <Route path="/womens" element={<Womens/>}></Route>
           <Route path="/kids" element={<Kids/>}></Route>
           <Route path="/newarrival" element={<NewArrivals/>}></Route>
+          <Route path="/sale" element={<Sale/>}></Route>
+          <Route path="/product/:id" element={<ProductDetails/>}></Route>
           <Route path="/footer" element={<Footer/>}></Route>
 
 

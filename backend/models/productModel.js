@@ -14,6 +14,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Product Price is required"],
     },
+    discount: {
+        type: Number,
+        // default: price * 10 / 100,
+    },
     stock: {
         type: Number,
         required: [true, "Product stock is required"],

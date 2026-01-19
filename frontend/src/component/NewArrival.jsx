@@ -14,8 +14,6 @@ const NewArrivals = () => {
     dispatch(newArrival());
   }, [dispatch]);
 
-  // Mock data for the "Masonry" layout effect 
-  // (In a real app, you'd map these dynamically, here I am creating a visual layout structure)
   const featuredItems = [
     {
       id: 1,
