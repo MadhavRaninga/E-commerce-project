@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+
+  // 🛒 get cart items from redux
+  const { items } = useSelector((state) => state.cart);
 
   const closeMenu = () => setOpen(false);
 
@@ -25,11 +29,22 @@ const Navbar = () => {
         </nav>
 
         {/* Desktop Icons */}
-        <div className="hidden md:flex space-x-6 text-xl">
-          <i className="ri-search-line"></i>
-          <i className="ri-heart-3-line"></i>
-          <i className="ri-shopping-cart-2-line"></i>
-          <i className="ri-user-3-line"></i>
+        <div className="hidden md:flex space-x-6 text-xl items-center">
+          <i className="ri-search-line cursor-pointer"></i>
+          <i className="ri-heart-3-line cursor-pointer"></i>
+
+          {/* 🛒 CART ICON */}
+          <Link to="/cart" className="relative">
+            <i className="ri-shopping-cart-2-line cursor-pointer"></i>
+
+            {items.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-black text-white text-xs px-2 rounded-full">
+                {items.length}
+              </span>
+            )}
+          </Link>
+
+          <i className="ri-user-3-line cursor-pointer"></i>
         </div>
 
         {/* Mobile Toggle */}
@@ -51,10 +66,20 @@ const Navbar = () => {
           <Link to="/sale" onClick={closeMenu}>Sale</Link>
 
           {/* Mobile Icons */}
-          <div className="flex space-x-6 text-xl pt-4 border-t">
+          <div className="flex space-x-6 text-xl pt-4 border-t items-center">
             <i className="ri-search-line"></i>
             <i className="ri-heart-3-line"></i>
-            <i className="ri-shopping-cart-2-line"></i>
+
+            <Link to="/cart" className="relative" onClick={closeMenu}>
+              <i className="ri-shopping-cart-2-line"></i>
+
+              {items.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs px-2 rounded-full">
+                  {items.length}
+                </span>
+              )}
+            </Link>
+
             <i className="ri-user-3-line"></i>
           </div>
         </nav>

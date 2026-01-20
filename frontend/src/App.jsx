@@ -14,6 +14,7 @@ import Kids from "./component/Kids";
 import NewArrivals from "./component/NewArrival";
 import Sale from "./component/Sale";
 import ProductDetails from "./component/ProductDetail";
+import Cart from "./component/Cart";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/newarrival" element={<NewArrivals/>}></Route>
           <Route path="/sale" element={<Sale/>}></Route>
           <Route path="/product/:id" element={<ProductDetails/>}></Route>
+          <Route path="/cart" element={<Cart/>}></Route>
           <Route path="/footer" element={<Footer/>}></Route>
 
 

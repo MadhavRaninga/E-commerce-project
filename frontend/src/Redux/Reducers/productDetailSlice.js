@@ -11,7 +11,7 @@ export const getProductById = createAsyncThunk(
       const { data } = await axios.get(
         `${baseURL}/api/products/getbyId/${id}`
       );
-      return data.product;   // ✅ CORRECT
+      return data.product;  
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Something went wrong"
