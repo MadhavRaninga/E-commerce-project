@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../component/Navbar";
 import Footer from "./Footer";
 import { newArrival } from "../Redux/Reducers/newSlice";
+import { Link } from "react-router-dom";
 
 const NewArrivals = () => {
   const dispatch = useDispatch();
@@ -98,6 +99,7 @@ const NewArrivals = () => {
                 ${item.size === "tall" ? "md:row-span-2" : ""}
               `}
             >
+              <Link to={`/product/${item._id}`} className="block w-full h-full">
               <img
                 src={item.image?.url || item.image}
                 alt={item.title}
@@ -119,6 +121,7 @@ const NewArrivals = () => {
                 <h3 className="font-serif text-2xl">{item.title}</h3>
                 <p className="font-medium mt-1">₹{item.price}</p>
               </div>
+              </Link>
             </div>
           ))}
         </div>

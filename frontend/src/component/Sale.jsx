@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../component/Navbar";
 import Footer from "./Footer";
 import { sale } from "../Redux/Reducers/saleSlice";
+import { Link } from "react-router-dom";
 
 const Sale = () => {
   const dispatch = useDispatch();
@@ -64,8 +65,9 @@ const Sale = () => {
           {saleProducts.length > 0 ? (
             saleProducts.map((product) => {
               const discountedPrice = product.price - Math.round((product.price * product.discount) / 100);
-
+              
               return (
+                <Link to={`/product/${product._id}`}>
                 <div
                   key={product._id}
                   className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition"
@@ -111,6 +113,7 @@ const Sale = () => {
                     </p>
                   </div>
                 </div>
+                </Link>
               );
             })
           ) : (
