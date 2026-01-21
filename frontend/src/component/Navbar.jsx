@@ -23,9 +23,7 @@ const Navbar = () => {
 
   const closeMenu = () => setOpen(false);
 
-  // 🔍 FILTER LOGIC
-  const filteredProducts =
-    search.trim() === ""
+  const filteredProducts = search.trim() === ""
       ? []
       : products.filter(
           (product) =>
@@ -109,7 +107,7 @@ const Navbar = () => {
                     No products found
                   </p>
                 ) : (
-                  filteredProductsSafe.slice(0, 6).map((item) => (
+                  filteredProductsSafe.slice(0, 10).map((item) => (
                     <Link
                       key={item._id}
                       to={`/product/${item._id}`}

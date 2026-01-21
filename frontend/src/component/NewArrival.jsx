@@ -76,7 +76,7 @@ const NewArrivals = () => {
             <button
               key={item}
               onClick={() => {
-                setFilter(item.toLowerCase());
+                setFilter();
                 setVisibleCount(9); // ✅ reset here (NO useEffect)
               }}
               className={`px-6 py-2 rounded-full text-sm font-medium transition ${

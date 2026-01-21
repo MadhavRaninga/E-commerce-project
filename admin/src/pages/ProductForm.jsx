@@ -85,33 +85,46 @@ const ProductForm = ({ mode }) => {
 
   return (
     <Layout>
-      <div className="row" style={{ marginBottom: 16 }}>
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
-          <div style={{ fontSize: 26, fontWeight: 800 }}>
+          <div className="text-2xl font-extrabold text-gray-900">
             {isEdit ? "Edit Product" : "Add Product"}
           </div>
-          <div className="muted">Manage your catalog</div>
+          <div className="text-gray-500 text-sm">
+            Manage your catalog
+          </div>
         </div>
-        <button className="btn secondary" onClick={() => navigate("/products")}>
+        <button
+          onClick={() => navigate("/products")}
+          className="border border-gray-900 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-gray-900 hover:text-white transition"
+        >
           Back
         </button>
       </div>
 
-      <div className="card" style={{ padding: 16, maxWidth: 820 }}>
-        <form onSubmit={submit} className="grid" style={{ gap: 12 }}>
-          <div className="grid" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))" }}>
+      {/* Form Card */}
+      <div className="bg-white border border-gray-200 rounded-xl p-4 max-w-3xl">
+        <form onSubmit={submit} className="grid gap-4">
+          {/* Name + Category */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="muted" style={{ fontSize: 12 }}>
+              <label className="text-xs text-gray-500">
                 Name *
               </label>
-              <input className="input" value={name} onChange={(e) => setName(e.target.value)} />
+              <input
+                className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-900"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
+
             <div>
-              <label className="muted" style={{ fontSize: 12 }}>
+              <label className="text-xs text-gray-500">
                 Category *
               </label>
               <input
-                className="input"
+                className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-900"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 placeholder="men / women / kids ..."
@@ -119,77 +132,88 @@ const ProductForm = ({ mode }) => {
             </div>
           </div>
 
+          {/* Description */}
           <div>
-            <label className="muted" style={{ fontSize: 12 }}>
+            <label className="text-xs text-gray-500">
               Description *
             </label>
             <textarea
-              className="input"
               rows={4}
+              className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-900"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
 
-          <div className="grid" style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}>
+          {/* Price / Stock / Discount */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="muted" style={{ fontSize: 12 }}>
+              <label className="text-xs text-gray-500">
                 Price *
               </label>
               <input
-                className="input"
+                type="number"
+                className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-900"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                type="number"
               />
             </div>
+
             <div>
-              <label className="muted" style={{ fontSize: 12 }}>
+              <label className="text-xs text-gray-500">
                 Stock *
               </label>
               <input
-                className="input"
+                type="number"
+                className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-900"
                 value={stock}
                 onChange={(e) => setStock(e.target.value)}
-                type="number"
               />
             </div>
+
             <div>
-              <label className="muted" style={{ fontSize: 12 }}>
+              <label className="text-xs text-gray-500">
                 Discount (%)
               </label>
               <input
-                className="input"
+                type="number"
+                className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-900"
                 value={discount}
                 onChange={(e) => setDiscount(e.target.value)}
-                type="number"
               />
             </div>
           </div>
 
-          <label style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          {/* New Arrival */}
+          <label className="flex items-center gap-3 text-sm text-gray-700">
             <input
               type="checkbox"
               checked={isNewArrival}
               onChange={(e) => setIsNewArrival(e.target.checked)}
+              className="h-4 w-4 accent-gray-900"
             />
-            <span>Mark as New Arrival</span>
+            Mark as New Arrival
           </label>
 
+          {/* Image */}
           <div>
-            <label className="muted" style={{ fontSize: 12 }}>
+            <label className="text-xs text-gray-500">
               Image {isEdit ? "(optional)" : "*"}
             </label>
             <input
-              className="input"
-              style={{ padding: 8 }}
               type="file"
               accept="image/*"
               onChange={(e) => setImage(e.target.files?.[0] || null)}
+              className="w-full mt-1 px-2 py-2 border border-gray-200 rounded-lg text-sm"
             />
           </div>
 
-          <button className="btn" disabled={loading} type="submit">
+          {/* Submit */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-2 bg-gray-900 text-white py-2 rounded-lg font-semibold hover:bg-black transition disabled:opacity-60"
+          >
             {loading ? "Saving..." : "Save"}
           </button>
         </form>
@@ -199,4 +223,3 @@ const ProductForm = ({ mode }) => {
 };
 
 export default ProductForm;
-

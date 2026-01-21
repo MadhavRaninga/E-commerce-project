@@ -40,9 +40,11 @@ const Homepage = () => {
           <p className="mt-4 text-lg max-w-xl text-gray-200">
             Premium fashion for Men, Women & Kids
           </p>
-          <button className="mt-8 bg-black text-white px-10 py-3 hover:bg-gray-900 transition">
-            Shop Now
-          </button>
+          <Link to="/newarrival">
+            <button className="mt-8 bg-black text-white px-10 py-3 hover:bg-gray-900 transition">
+              Shop Now
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -107,7 +109,7 @@ const Homepage = () => {
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
             {products.length !== 0 ? (
-              products.slice(0, 8).map((product) => (
+              products.slice(15, 27).map((product) => (
                 <Link
                   to={`/product/${product._id}`}
                   onClick={(e) => {
