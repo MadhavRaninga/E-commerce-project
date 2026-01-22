@@ -88,10 +88,10 @@ const Orders = () => {
                         Processing
                       </button>
                       <button
-                        className="btn"
-                        onClick={() => updateStatus(o._id, "Shipped")}
+                        className="btn Delivery"
+                        onClick={() => updateStatus(o._id, "Out for Delivery")}
                       >
-                        Shipped
+                        Out for Delivery 
                       </button>
                       <button
                         className="btn danger"

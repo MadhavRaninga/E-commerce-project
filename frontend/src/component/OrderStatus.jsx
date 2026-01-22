@@ -4,12 +4,11 @@ const OrderStatus = () => {
   const steps = [
     "Order Placed",
     "Processing",
-    "Shipped",
     "Out for Delivery",
     "Delivered",
   ];
 
-  const currentStep = 2; // example → later from backend
+  const currentStep = 1; // example → later from backend
 
   return (
     <div className="bg-[#FAF9F6] min-h-screen">

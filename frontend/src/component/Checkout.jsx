@@ -12,7 +12,7 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const { items } = useSelector((state) => state.cart);
-  const { loading, error, order } = useSelector((state) => state.order);
+  const { loading, error, lastOrder } = useSelector((state) => state.order);
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -30,24 +30,22 @@ const Checkout = () => {
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);
+
+
   useEffect(() => {
-    if (order && order._id) {
+    if (lastOrder?._id) {
       toast.success("Order placed successfully");
+      navigate(`/order-success/${lastOrder._id}`);
 
-      // ✅ ABSOLUTE PATH
-      navigate(`/order-success/${order._id}`);
-
-      // ✅ Clear AFTER redirect
-      setTimeout(() => {
-        dispatch(clearOrderState());
-      }, 0);
+      dispatch(clearOrderState());
     }
 
     if (error) {
       toast.error(error);
       dispatch(clearOrderState());
     }
-  }, [order, error, dispatch, navigate]);
+  }, [lastOrder, error, dispatch, navigate]);
+
 
 
 
@@ -58,7 +56,7 @@ const Checkout = () => {
       toast.info("Please fill all address details");
       return;
     }
-    dispatch(placeOrder({ address, city, pincode }));
+    dispatch(placeOrder({ address, city, pincode, items, total }));
   };
 
   return (

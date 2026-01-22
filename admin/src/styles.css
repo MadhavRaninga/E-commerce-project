@@ -37,11 +37,13 @@ button {
   border: 1px solid #111827;
   background: #111827;
   color: white;
-  padding: 10px 14px;
+  padding: 8px 18px;
   border-radius: 10px;
   font-weight: 600;
 }
-
+.Delivery{
+  width: 140px;
+}
 .btn.secondary {
   background: white;
   color: #111827;
